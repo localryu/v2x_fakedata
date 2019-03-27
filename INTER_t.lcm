@@ -1,0 +1,13 @@
+package eurecar;
+
+struct INTER_t
+{
+	int64_t timestamp;
+	int32_t	inter_1st_state;
+	int32_t	inter_1st_time;
+	int32_t	inter_2nd_state;
+	int32_t	inter_2nd_time;
+	int32_t	inter_3rd_state;
+	int32_t	inter_3rd_time;
+}
+

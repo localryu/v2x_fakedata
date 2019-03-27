@@ -1,0 +1,11 @@
+package eurecar;
+
+struct TIM_WORKZONE_t
+{	
+	int64_t	timestamp;
+	int32_t	n_wklane_list;
+	int32_t	lane_num[4];
+	int32_t	wk_path_id;
+	int32_t	dummy;	
+}
+
