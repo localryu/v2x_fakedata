@@ -10,9 +10,9 @@
 #include <time.h>
 #include <math.h>
 
-int RED = 30;
-int GREEN = 50;
-int YELLOW = 10;
+int RED = 10;
+int GREEN = 20;
+int YELLOW = 2;
 
 
 int i = 1, h = 0;
@@ -31,7 +31,8 @@ void send_inter(){
 
 	eurecar_INTER_t intersection;
 	i = (rand() % 100);
-
+	
+	//initialize initial traffic time.
 	if(h == 0){	
 		for(int x = 0; x < 3; x++){
 			red[x] = RED * 10 + 10;
@@ -41,28 +42,9 @@ void send_inter(){
 		h++;
 	}
 
-	if(red[0] < 0)
-		red[0] = RED * 10;
-	if(red[1] < 0)
-		red[1] = RED * 10;
-	if(red[2] < 0)
-		red[2] = RED * 10;
-	if(green[0] < 0)
-		green[0] = GREEN * 10;
-	if(green[1] < 0)
-		green[1] = GREEN * 10;
-	if(green[2] < 0)
-		green[2] = GREEN * 10;
-	if(yellow[0] < 0)
-		yellow[0] = YELLOW * 10;
-	if(yellow[1] < 0)
-		yellow[1] = YELLOW * 10;
-	if(yellow[2] < 0)
-		yellow[2] = YELLOW * 10;
-
-
 	intersection.timestamp = 0;
 
+	//traffic logic
 	if(j < RED){
 		inter_1st_state = 3;
 		red[0] = red[0] - 10;
@@ -111,6 +93,28 @@ void send_inter(){
 		inter_3rd_time = yellow[2];
 	}
 
+	//reinitialize traffic time if the times are under zero.
+	if(red[0] <= 0)
+		red[0] = RED * 10;
+	if(red[1] <= 0)
+		red[1] = RED * 10;
+	if(red[2] <= 0)
+		red[2] = RED * 10;
+	if(green[0] <= 0)
+		green[0] = GREEN * 10;
+	if(green[1] <= 0)
+		green[1] = GREEN * 10;
+	if(green[2] <= 0)
+		green[2] = GREEN * 10;
+	if(yellow[0] <= 0)
+		yellow[0] = YELLOW * 10;
+	if(yellow[1] <= 0)
+		yellow[1] = YELLOW * 10;
+	if(yellow[2] <= 0)
+		yellow[2] = YELLOW * 10;
+
+
+	//send intersection data randomly.
 	if(i % 7 == 1){
 		fprintf(stdout, "loop : %d, j : %3d, k : %3d\n", i%7, j, k);
 		ds1 = inter_1st_state;
@@ -151,6 +155,7 @@ void send_inter(){
 		dt3 = inter_3rd_time;
 	}
 	
+	//assign value into lcm variables.
 	intersection.inter_1st_state = ds1;
 	intersection.inter_1st_time = dt1;
 	intersection.inter_2nd_state = ds2;
