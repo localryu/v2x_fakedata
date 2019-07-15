@@ -1,5 +1,6 @@
 # v2x_fakedata
-make lcm intersection (from v2x spat msgs) fakedata
+ Make lcm intersection(traffic lights) (from v2x spat msgs) fakedata.
+ This program is made for testing intersection velocity planning. 
 
 ## Reqired
  - lcm (https://github.com/lcm-proj/lcm.git)
